@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameAbility | Джойстик для особенных геймеров</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #f5f7fe;
+      color: #152032;
+      line-height: 1.5;
+    }
+
+    /* цветовая схема: контрастная, доступная, технологичная */
+    .navbar {
+      background: #0c1427;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 10, 30, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #5f9df3;
+      background: #1f2b44;
+      padding: 0.1rem 0.6rem;
+      border-radius: 30px;
+      margin-left: 6px;
+      font-size: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #cfdbf5;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+
+    .nav-links a:hover {
+      color: white;
+      border-bottom-color: #5f9df3;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 600;
+      margin: 3rem 0 2rem 0;
+      color: #0c1427;
+      border-left: 8px solid #5f9df3;
+      padding-left: 1.5rem;
+    }
+
+    /* главная геройская зона */
+    .hero {
+      background: linear-gradient(135deg, #e2eafc, #ffffff);
+      border-radius: 3rem;
+      padding: 3rem;
+      margin: 1.5rem 0 3rem;
+      box-shadow: 0 20px 30px -10px rgba(28, 52, 84, 0.15);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .hero-content {
+      flex: 2 1 400px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      background: linear-gradient(145deg, #0c1427, #2a4b7c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content p {
+      font-size: 1.25rem;
+      color: #1e2b41;
+      max-width: 650px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-image {
+      flex: 1 1 300px;
+      background: #1f344d;
+      border-radius: 2.5rem;
+      padding: 1.8rem;
+      color: white;
+      text-align: center;
+      box-shadow: inset 0 -5px 0 #5f9df3;
+    }
+
+    .hero-image svg {
+      width: 100%;
+      max-width: 260px;
+      height: auto;
+      filter: drop-shadow(0 8px 12px #00000030);
+    }
+
+    .badge {
+      background: #5f9df3;
+      color: #0c1427;
+      font-weight: 700;
+      padding: 0.25rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      background: #0c1427;
+      color: white;
+      border: none;
+      padding: 0.9rem 2.4rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      border: 2px solid #0c1427;
+    }
+
+    .btn:hover {
+      background: #2a4b7c;
+      border-color: #5f9df3;
+      transform: scale(1.02);
+    }
+
+    .card {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 12px 24px -12px rgba(0, 32, 64, 0.2);
+      transition: 0.2s ease;
+      height: 100%;
+      border: 1px solid #eef3fc;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 30px -12px #1e3f6b40;
+    }
+
+    .card h3 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #0f1e36;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .grid-2, .team-grid, .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .team-card {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 8px 18px #d2e0fc;
+      border-left: 6px solid #5f9df3;
+    }
+
+    .team-card h4 {
+      font-size: 1.6rem;
+      color: #0c1427;
+    }
+
+    .role {
+      color: #2e4a7a;
+      font-weight: 600;
+      margin: 0.5rem 0 1rem;
+      display: inline-block;
+      background: #e3edfe;
+      padding: 0.3rem 1.2rem;
+      border-radius: 30px;
+    }
+
+    .post-meta {
+      display: flex;
+      gap: 1.2rem;
+      color: #526e96;
+      margin: 0.8rem 0 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .tag {
+      background: #dde9ff;
+      color: #133155;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    /* визуальные материалы */
+    .diagram-box {
+      background: #0f1e30;
+      color: white;
+      border-radius: 2rem;
+      padding: 1.8rem;
+      margin: 2rem 0;
+    }
+
+    .progress-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.2rem;
+      height: 180px;
+      margin: 2rem 0;
+    }
+
+    .bar {
+      background: #5f9df3;
+      width: 50px;
+      border-radius: 20px 20px 0 0;
+      transition: 0.3s;
+    }
+
+    .bar-label {
+      text-align: center;
+      color: #152032;
+      font-weight: 500;
+    }
+
+    .resource-list {
+      list-style: none;
+    }
+
+    .resource-list li {
+      margin: 1rem 0;
+      padding: 1rem 1.5rem;
+      background: #ecf2fc;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .resource-list a {
+      color: #152032;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+    }
+
+    .resource-list a:hover {
+      border-bottom-color: #5f9df3;
+      color: #0a1c38;
+    }
+
+    .video-placeholder {
+      background: #172b44;
+      border-radius: 2rem;
+      padding: 3rem;
+      text-align: center;
+      color: white;
+      margin: 2rem 0;
+      border: 2px dashed #5f9df3;
+    }
+
+    footer {
+      background: #0c1427;
+      color: #a0b9da;
+      padding: 2.5rem;
+      text-align: center;
+      margin-top: 4rem;
+      border-radius: 3rem 3rem 0 0;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">🎮 Game<span>Ability</span></div>
+    <div class="nav-links">
+      <a href="#home">Главная</a>
+      <a href="#about">О проекте</a>
+      <a href="#team">Участники</a>
+      <a href="#journal">Журнал</a>
+      <a href="#resources">Ресурсы</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Главная / аннотация -->
+    <section id="home">
+      <div class="hero">
+        <div class="hero-content">
+          <span class="badge">🔵 доступный гейминг</span>
+          <h1>Игровой джойстик <br>для людей с инвалидностью</h1>
+          <p><strong>Аннотация:</strong> разработка адаптивного джойстика с тактильной обратной связью, настраиваемыми кнопками и креплением под различные нозологии. Цель — подарить возможность комфортно играть людям с нарушениями моторики.</p>
+          <a href="#about" class="btn">О проекте</a>
+        </div>
+        <div class="hero-image">
+          <!-- авторский SVG контроллера -->
+          <svg viewBox="0 0 200 160" fill="none">
+            <rect x="30" y="30" width="140" height="80" rx="20" fill="#2d4f7c" stroke="#8bb3f0" stroke-width="4" />
+            <circle cx="70" cy="70" r="16" fill="#0e1e33" stroke="#5f9df3" stroke-width="4" />
+            <circle cx="130" cy="70" r="16" fill="#0e1e33" stroke="#5f9df3" stroke-width="4" />
+            <path d="M85 70 L115 70" stroke="#cfdefa" stroke-width="8" stroke-linecap="round" />
+            <rect x="40" y="110" width="25" height="25" rx="6" fill="#2f6491" />
+            <rect x="135" y="110" width="25" height="25" rx="6" fill="#2f6491" />
+            <circle cx="100" cy="120" r="10" fill="#b0c9f0" stroke="#0e1e33" stroke-width="3" />
+            <text x="70" y="155" fill="white" font-size="12" font-weight="bold">🎮 адаптив</text>
+          </svg>
+          <p style="margin-top: 0.8rem;">💡 прототип версии 2.0</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- О проекте подробно -->
+    <section id="about">
+      <h2 class="section-title">🔍 О проекте</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>🧩 проблема</h3>
+          <p>Стандартные геймпады не учитывают особенности людей с ДЦП, тремором, мышечной дистрофией или отсутствием конечностей. Наш джойстик — модульная система с возможностью перепрограммирования кнопок, увеличенными клавишами и переменным усилием стиков.</p>
+          <div style="background: #102331; border-radius: 1.5rem; padding: 1rem; margin-top: 1rem; color: white; text-align: center;">
+            <span>📐 3D-модель корпуса (основные узлы)</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>⚙️ решение</h3>
+          <p>Мы создаём открытую платформу на базе Arduino/ESP32. Джойстик поддерживает внешние выносные кнопки (sip/puff, большие педали), а также крепление на инвалидное кресло. </p>
+          <ul style="margin-left:1.5rem; margin-top: 1rem;">
+            <li>сенсорный слайдер</li>
+            <li>6 программируемых макросов</li>
+            <li>виброотклик</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- схемы и диаграммы (иллюстративный материал) -->
+      <div class="diagram-box">
+        <p style="font-size:1.4rem; margin-bottom: 1rem;">📊 Диаграмма сценариев использования</p>
+        <svg width="100%" height="120" viewBox="0 0 500 100">
+          <rect x="10" y="20" width="90" height="60" fill="#2d5a9a" rx="12" />
+          <text x="30" y="55" fill="white">тремор</text>
+          <rect x="130" y="10" width="90" height="70" fill="#3f7bcb" rx="12" />
+          <text x="150" y="50" fill="white">слабая сила</text>
+          <rect x="250" y="20" width="90" height="60" fill="#578fdc" rx="12" />
+          <text x="270" y="55" fill="white">одна рука</text>
+          <rect x="370" y="30" width="90" height="50" fill="#74aaf0" rx="12" />
+          <text x="390" y="60" fill="white">спазмы</text>
+        </svg>
+        <p><em>диаграмма: сценарии, покрываемые настройками джойстика</em></p>
+      </div>
+
+      <!-- фото/медиа (имитация) -->
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 2rem 0;">
+        <div style="background: #b7cef0; border-radius: 2rem; flex:1; min-width:200px; padding:2rem; text-align: center;">🖼️ фотополимерный корпус</div>
+        <div style="background: #99bae8; border-radius: 2rem; flex:1; min-width:200px; padding:2rem; text-align: center;">🎬 видео-тест с пользователем</div>
+      </div>
+    </section>
+
+    <!-- Участники и личный вклад -->
+    <section id="team">
+      <h2 class="section-title">🧑‍🤝‍🧑 Участники</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <h4>Алексей Григорьев</h4>
+          <span class="role">👨‍💻 инженер-электронщик</span>
+          <p><strong>Личный вклад:</strong> разработал принципиальную схему на ESP32, подобрал тактовые переключатели с усилием 0.8 Н, спаял 3 макетных платы, провёл первичное тестирование.</p>
+        </div>
+        <div class="team-card">
+          <h4>Мария Никольская</h4>
+          <span class="role">🎨 UX/промышленный дизайнер</span>
+          <p><strong>Личный вклад:</strong> создала эргономичную 3D-модель в Fusion360, напечатала 6 итераций корпуса, подготовила съёмные накладки разной жёсткости.</p>
+        </div>
+        <div class="team-card">
+          <h4>Даниил Ветров</h4>
+          <span class="role">🧑‍⚕️ клинический консультант</span>
+          <p><strong>Личный вклад:</strong> провёл интервью с 5 пациентами с ДЦП, собрал требования, организовал тестирование в центре «Преодоление», внёс правки в расположение кнопок.</p>
+        </div>
+        <div class="team-card">
+          <h4>Елена Маслова</h4>
+          <span class="role">📱 программист ПО</span>
+          <p><strong>Личный вклад:</strong> написала прошивку с поддержкой Bluetooth HID, реализовала конфигуратор кнопок через web-интерфейс (HTML+JS), провела 2 итерации по отзывам.</p>
+        </div>
+      </div>
+
+      <!-- совместное фото (имитация) -->
+      <div style="background: #1c314e; border-radius: 3rem; padding: 2rem; margin: 2rem 0; color: white;">
+        <p>👥 Команда GameAbility с прототипом на тестировании (февраль 2025)</p>
+        <div style="background: #2f5688; height: 150px; border-radius: 2rem; display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+          <span>⚙️ Алексей</span> <span>🎨 Мария</span> <span>🩺 Даниил</span> <span>💻 Елена</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Журнал (3+ поста) -->
+    <section id="journal">
+      <h2 class="section-title">📌 Журнал работы</h2>
+      <div class="post-grid">
+        <!-- пост 1 -->
+        <div class="card">
+          <span class="tag">🔬 исследование</span>
+          <h3>Интервью с будущими пользователями</h3>
+          <div class="post-meta"><span>📅 5 декабря 2024</span><span>✍️ Даниил</span></div>
+          <p>Провели 6 встреч в реабилитационном центре. Выявили главную проблему: мелкие кнопки и тугой ход стиков. Нужны выносные контакты 3.5мм.</p>
+          <!-- график -->
+          <div style="background:#d2e3ff; border-radius: 1rem; padding: 1rem; margin-top: 1rem;">📊 80% опрошенных просят увеличить площадь кнопок</div>
+        </div>
+        <!-- пост 2 -->
+        <div class="card">
+          <span class="tag">🖨️ прототип</span>
+          <h3>Первая печатная плата готова</h3>
+          <div class="post-meta"><span>📅 20 января 2025</span><span>✍️ Алексей</span></div>
+          <p>Заказали платы в Китае, спаяли тестовый экземпляр. Все пины работают, но заметили наводки на аналоговых входах — добавим конденсаторы.</p>
+          <div style="background: #afc9f0; border-radius: 1rem; height: 70px; margin-top: 1rem; display: flex; justify-content: center; align-items: center;">📸 фото платы v0.3</div>
+        </div>
+        <!-- пост 3 -->
+        <div class="card">
+          <span class="tag">🧑‍🤝‍🧑 тестирование</span>
+          <h3>Демо-день в школе-интернате</h3>
+          <div class="post-meta"><span>📅 15 февраля 2025</span><span>✍️ Мария</span></div>
+          <p>Двое подростков с ДЦП смогли сыграть в гонки. Джойстик крепился к подлокотнику коляски. Собрали обратную связь по усилию нажатия.</p>
+          <div style="background: #a2bef0; border-radius: 1rem; padding: 0.8rem; margin-top: 1rem;">🏁 видеоотзыв (длительность 2:14)</div>
+        </div>
+        <!-- пост 4 (дополнительный, чтобы было больше трёх) -->
+        <div class="card">
+          <span class="tag">📦 поставка</span>
+          <h3>Получены комплектующие</h3>
+          <div class="post-meta"><span>📅 3 марта 2025</span><span>✍️ Елена</span></div>
+          <p>Пришли тактовые свитчи Cherry, джойстики alps и силиконовые грипсы. Начинаем сборку 5 пилотных образцов.</p>
+          <div style="background: #b2ccf0; border-radius: 1rem; padding: 0.8rem; margin-top: 1rem;">📦 📦 📦</div>
+        </div>
+      </div>
+
+      <!-- видео-блок (медиа) -->
+      <div class="video-placeholder">
+        <span style="font-size:3rem;">▶️</span>
+        <p style="font-size:1.5rem;">Видеопрезентация прототипа (нажмите для воспроизведения)</p>
+        <p style="opacity:0.9;">Обзор функций: сменные накладки, переключение макросов, эргономика.</p>
+      </div>
+    </section>
+
+    <!-- РЕСУРСЫ -->
+    <section id="resources">
+      <h2 class="section-title">📚 Полезные ресурсы</h2>
+      <div class="grid-2" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <h3>🤝 партнёры</h3>
+          <ul class="resource-list">
+            <li>🔗 <a href="#">Центр «Преодоление» (клинический партнёр)</a></li>
+            <li>🔗 <a href="#">ООО «Доступная среда» — производство кнопок</a></li>
+            <li>🔗 <a href="#">Фонд поддержки инвалидов-геймеров AbleGamers</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>📄 статьи / разработки</h3>
+          <ul class="resource-list">
+            <li>📘 <a href="#">Проектирование адаптивных контроллеров (ACM)</a></li>
+            <li>🎮 <a href="#">Xbox Adaptive Controller — открытые спецификации</a></li>
+            <li>🧩 <a href="#">Референсы по SIP-кнопкам (дыхательные выключатели)</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- дополнительные иконки / ссылки на организацию -->
+      <div style="background:#dde5f5; border-radius: 2rem; padding: 1.5rem; margin: 2rem 0; display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center;">
+        <span>🔵 организация-партнёр: ВОИ (Всероссийское общество инвалидов)</span>
+        <span>🌐 сайт: gameability.ru (в разработке)</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 GameAbility — проектная деятельность, группа ИВТ-22</p>
+    <p style="margin-top: 1rem;">Все изображения и схемы являются уникальной разработкой команды</p>
+  </footer>
+</body>
+</html>
